@@ -1,6 +1,7 @@
 package front;
 
 import com.sun.security.auth.module.JndiLoginModule;
+import logic.StyleAnimation;
 
 import javax.print.attribute.standard.JobName;
 import javax.swing.*;
@@ -31,7 +32,7 @@ public class FunctionButton extends JPanel {
         btns.add(new JButton("x^y"));
         btns.add(new JButton("x²"));
         btns.add(new JButton("Mod"));
-        btns.add(new JButton("⇦"));
+        btns.add(new JButton("<-"));
         btns.add(new JButton("sin"));
         btns.add(new JButton("cos"));
         btns.add(new JButton("tan"));
@@ -53,6 +54,7 @@ public class FunctionButton extends JPanel {
             btn.setFont(FuncBtnFont);//设置字体
             btn.setBackground(new Color(230,230,230));//设置背景色
             btn.setBorder(border);//设置边框
+            btn.addMouseListener(new StyleAnimation(btn));
             this.add(btn);//添加
         }
 

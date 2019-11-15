@@ -6,7 +6,9 @@ import javax.print.attribute.standard.JobName;
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import logic.StyleAnimation;
 
 /**
     Basic Button
@@ -71,6 +73,7 @@ public class BasicButton extends JPanel {
                 btn.setBorder(border);
                 this.add(btn);
             }
+            btn.addMouseListener(new StyleAnimation(btn));
         }
     }
 
