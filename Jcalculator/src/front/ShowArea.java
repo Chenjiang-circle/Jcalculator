@@ -6,7 +6,6 @@ import java.awt.*;
 
 /**
     显示文本框，实时显示交互结果
-    Author      : yjp
     date        : 2019/11/14
     version     : 1.0
  */
