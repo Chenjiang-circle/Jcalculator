@@ -11,7 +11,6 @@ import java.util.ArrayList;
 /**
     Function Button
     计算器中高级功能键，提供函数计算功能
-    Author      : yjp
     date        : 2019/11/14
     version     : 1.0
  */
