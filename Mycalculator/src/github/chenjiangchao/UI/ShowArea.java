@@ -18,7 +18,7 @@ public class ShowArea extends JPanel {
         this.add(new JPanel());//占据最上方，留备菜单
 
 
-        result = new JTextField("???");
+        result = new JTextField("0");
         result.setEditable(false);//设置文本框为不可编辑
 
         Font showFont = new Font("微软雅黑",Font.PLAIN,20);
