@@ -1,4 +1,4 @@
-package front;
+package github.chenjiangchao.UI;
 
 import javax.swing.*;
 import javax.swing.border.Border;

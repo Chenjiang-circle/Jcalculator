@@ -1,9 +1,6 @@
-package front;
+package github.chenjiangchao.UI;
 
-import com.sun.security.auth.module.JndiLoginModule;
-import logic.StyleAnimation;
-
-import javax.print.attribute.standard.JobName;
+import github.chenjiangchao.Listener.StyleAnimation;
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
