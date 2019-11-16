@@ -1,4 +1,4 @@
-package logic;
+package github.chenjiangchao.Listener;
 
 import javax.swing.*;
 import java.awt.*;
@@ -62,7 +62,7 @@ public class StyleAnimation extends MouseAndKeyboardListener
         button.setBackground(c);
 
     }
-
+/*
     //鼠标按下动画
     public void mousePressed(MouseEvent e)
     {
@@ -77,8 +77,8 @@ public class StyleAnimation extends MouseAndKeyboardListener
         //存在问题
         mouseExited(e);
     }
-
-    //键盘动画
+*/
+    //键盘动画及响应
     public void keyTyped(KeyEvent e)
     {
 

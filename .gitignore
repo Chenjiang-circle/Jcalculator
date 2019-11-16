@@ -3,6 +3,7 @@
 
 # Log file
 *.log
+*.iml
 
 # BlueJ files
 *.ctxt
@@ -11,7 +12,7 @@
 .mtj.tmp/
 .metadata/
 .idea/
-
+out/
 # Package Files #
 *.jar
 *.war
