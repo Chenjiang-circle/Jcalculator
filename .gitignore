@@ -12,7 +12,10 @@
 .mtj.tmp/
 .metadata/
 .idea/
+<<<<<<< HEAD
 out/
+=======
+>>>>>>> dev
 
 # Package Files #
 *.jar
