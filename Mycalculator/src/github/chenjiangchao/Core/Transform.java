@@ -18,9 +18,10 @@ public class Transform {
             // 如果发现是数组直接输出到新字符数组中
             if (expr.charAt(i) >= '0' && expr.charAt(i) <= '9') {
                 String tmp = "";
-                while (expr.charAt(i) >= '0' && expr.charAt(i) <= '9') {
+                // 要考虑浮点数
+                while ((expr.charAt(i) >= '0' && expr.charAt(i) <= '9') || expr.charAt(i) == '.') {
                     tmp += expr.charAt(i);
-                    if (i+1 < expr.length() && expr.charAt(i+1) >= '0' && expr.charAt(i+1) <= '9') {
+                    if (i+1 < expr.length() && ((expr.charAt(i+1) >= '0' && expr.charAt(i+1) <= '9') || expr.charAt(i+1) == '.')) {
                         i++;
                     } else {
                         break;
