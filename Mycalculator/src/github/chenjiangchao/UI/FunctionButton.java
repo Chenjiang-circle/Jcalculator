@@ -1,5 +1,6 @@
 package github.chenjiangchao.UI;
 
+import github.chenjiangchao.Listener.ButtonResponse;
 import github.chenjiangchao.Listener.StyleAnimation;
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -24,22 +25,11 @@ public class FunctionButton extends JPanel {
 
          */
         this.setLayout(new GridLayout(3,5));//三行五列
-
-        btns.add(new JButton("√x"));
-        btns.add(new JButton("x^y"));
-        btns.add(new JButton("x²"));
-        btns.add(new JButton("Mod"));
-        btns.add(new JButton("<-"));
-        btns.add(new JButton("sin"));
-        btns.add(new JButton("cos"));
-        btns.add(new JButton("tan"));
-        btns.add(new JButton("π"));
-        btns.add(new JButton("1/x"));
-        btns.add(new JButton("10^x"));
-        btns.add(new JButton("log"));
-        btns.add(new JButton("Exp"));
-        btns.add(new JButton("n!"));
-        btns.add(new JButton("C"));
+        String name[] = { "√x","x^y", "x^2","Mod", "<-", "sin", "cos", "tan", "π", "1/x", "10^x", "log", "Exp", "n!", "C"};
+        for(int i = 0; i < name.length; i++)
+        {
+            btns.add(new JButton(name[i]));
+        }
 
         //按钮边框样式
         Border border = BorderFactory.createLineBorder(new Color(220,220,220));
@@ -52,6 +42,7 @@ public class FunctionButton extends JPanel {
             btn.setBackground(new Color(230,230,230));//设置背景色
             btn.setBorder(border);//设置边框
             btn.addMouseListener(new StyleAnimation(btn));
+            btn.addMouseListener(new ButtonResponse(btn,this));
             this.add(btn);//添加
         }
 

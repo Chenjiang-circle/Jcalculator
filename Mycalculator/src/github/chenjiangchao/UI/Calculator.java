@@ -1,5 +1,7 @@
 package github.chenjiangchao.UI;
 
+import github.chenjiangchao.Listener.ButtonResponse;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -23,6 +25,7 @@ public class Calculator extends JFrame {
 
         ShowArea show = new ShowArea();//最上方（菜单与文本框）
         this.add(show);
+        ButtonResponse.setResultText(show.getTextField());
 
         FunctionButton funcBtnArea = new FunctionButton();//高级功能按键区
         this.add(funcBtnArea);

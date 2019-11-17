@@ -10,7 +10,7 @@ public class Calculate {
      */
     public static double calculatePostfixNotation(String[] strList) {
         Stack<String> stack = new Stack<>();
-        for (int i = 0; i < strList.length; i++) {
+        for (int i = 0; i < strList.length && strList[i]!=null; i++) {
             // 判断元素是否为数字，是数字就压如栈中。否则就将栈中的元素取出来，进行相应的计算，将结果重新压入栈中
             if (strList[i].charAt(0) >= '0' && strList[i].charAt(0) <= '9') {
                 // 元素第一个字符是数字，说明就是数字喽
@@ -90,6 +90,7 @@ public class Calculate {
      * @return 返回结果
      */
     public static double advancedCalculate(String opreator, double num1, double num2) {
+        System.out.println(opreator);
         switch (opreator) {
             case "x^y":
                 return Math.pow(num1, num2);

@@ -4,6 +4,8 @@ import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
 import java.util.ArrayList;
+
+import github.chenjiangchao.Listener.ButtonResponse;
 import github.chenjiangchao.Listener.StyleAnimation;
 
 /**
@@ -24,25 +26,11 @@ public class BasicButton extends JPanel {
                 = | 1 | 4 | 7 | * | /
          */
         this.setLayout(new GridLayout(3,6));//三行六列
-
-        btns.add(new JButton("•"));
-        btns.add(new JButton("3"));
-        btns.add(new JButton("6"));
-        btns.add(new JButton("9"));
-        btns.add(new JButton("("));
-        btns.add(new JButton(")"));
-        btns.add(new JButton("0"));
-        btns.add(new JButton("2"));
-        btns.add(new JButton("5"));
-        btns.add(new JButton("8"));
-        btns.add(new JButton("+"));
-        btns.add(new JButton("-"));
-        btns.add(new JButton("="));
-        btns.add(new JButton("1"));
-        btns.add(new JButton("4"));
-        btns.add(new JButton("7"));
-        btns.add(new JButton("×"));
-        btns.add(new JButton("÷"));
+        String name[] = {".","3","6","9","(",")","0","2","5","8","+","-","=","1","4","7","*","/"};
+        for(int i = 0; i < name.length; i++)
+        {
+            btns.add(new JButton(name[i]));
+        }
 
         //按钮边框
         Border border = BorderFactory.createLineBorder(new Color(220,220,220));
@@ -70,6 +58,7 @@ public class BasicButton extends JPanel {
                 this.add(btn);
             }
             btn.addMouseListener(new StyleAnimation(btn));
+            btn.addMouseListener(new ButtonResponse(btn,this));
         }
     }
 
