@@ -26,7 +26,7 @@ public class BasicButton extends JPanel {
                 = | 1 | 4 | 7 | * | /
          */
         this.setLayout(new GridLayout(3,6));//三行六列
-        String name[] = {".","3","6","9","(",")","0","2","5","8","+","-","=","1","4","7","×","÷"};
+        String name[] = {".","3","6","9","(",")","0","2","5","8","+","-","=","1","4","7","*","/"};
         for(int i = 0; i < name.length; i++)
         {
             btns.add(new JButton(name[i]));

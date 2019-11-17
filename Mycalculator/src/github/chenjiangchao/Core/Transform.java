@@ -87,7 +87,7 @@ public class Transform {
             System.out.print("弹出" + pop);
             postixNotation[j++] = pop;
         }
-        System.out.println();
+        //System.out.println(postixNotation);
         return postixNotation;
     }
 }

@@ -25,7 +25,7 @@ public class FunctionButton extends JPanel {
 
          */
         this.setLayout(new GridLayout(3,5));//三行五列
-        String name[] = { "√x","x^y", "x²","Mod", "<-", "sin", "cos", "tan", "π", "1/x", "10^x", "log", "Exp", "n!", "C"};
+        String name[] = { "√x","x^y", "x^2","Mod", "<-", "sin", "cos", "tan", "π", "1/x", "10^x", "log", "Exp", "n!", "C"};
         for(int i = 0; i < name.length; i++)
         {
             btns.add(new JButton(name[i]));
