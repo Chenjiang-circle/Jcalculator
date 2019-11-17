@@ -7,15 +7,17 @@ import java.util.ArrayList;
 public class Checker {
 	public static Boolean checker(String expression)
 	{
-		boolean isNewNumber = true;
-		boolean hasPoint = false;
+		boolean isNewNumber = true;//是否是新的数字标志位
+		boolean hasPoint = false;//是否有小数点标志位
 
+		//数字序列
 		ArrayList<String> DigitList = new ArrayList<String>();
 		for (int i = 0; i <= 9; i++)
 		{
 			DigitList.add(String.valueOf(i));
 		}
 
+		//基本运算符序列
 		ArrayList<String> OperatorList = new ArrayList<String>()
 		{
 			{
@@ -82,7 +84,7 @@ public class Checker {
 		//遍历结束没有问题,返回true;
 		return true;
 	}
-
+	//检查是否是合法的高级运算单值
 	public static boolean legalAdvancedCalculate(String operator,String expression)
 	{
 		Service service = new Service();

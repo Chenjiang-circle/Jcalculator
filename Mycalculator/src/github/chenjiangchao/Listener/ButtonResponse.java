@@ -14,16 +14,18 @@ import java.util.ArrayList;
 public class ButtonResponse extends MouseAndKeyboardListener {
     private static JTextField resultText;
     private static StringBuilder inputString = new StringBuilder("0");
-    private static int bracketCount = 0;
+    private static int bracketCount = 0;//记录左括号个数
     private static boolean isNewNumber = true; //该属性为true时，表示一个新数字即将输入
 
     private JPanel actionObject;
     private JButton button;
-    private static Boolean twoParam = false;
-    private static String fontParam,realParam;
-    private static String twoParamOperator;
+    private static Boolean twoParam = false;//设置标志位，表示当前是否存在双值高级运算操作
+    private static String fontParam,realParam;//双值高级运算中的两个取值表达式
+    private static String twoParamOperator;//双值高级运算中的运算符
+    //private static boolean giveFontParamStartIndex = true;
+    private static int fontParamStartIndex = 0;
 
-    private ArrayList<String> operator = new ArrayList<String >()
+    private ArrayList<String> operator = new ArrayList<String >()//基本运算符序列
     {
         {
             add("+");
@@ -33,7 +35,7 @@ public class ButtonResponse extends MouseAndKeyboardListener {
         }
     };
 
-    public ButtonResponse(JButton btn,JPanel obj)//设置
+    public ButtonResponse(JButton btn,JPanel obj)//构造函数初始化
     {
         button = btn;
         actionObject = obj;
@@ -41,51 +43,63 @@ public class ButtonResponse extends MouseAndKeyboardListener {
     }
 
     //鼠标点击
-    public void mouseReleased(MouseEvent e)
+    public void mouseReleased(MouseEvent e)//设置为Released是为了避免Clicked下产生的鼠标点击时发生位移导致点击失效的问题
     {
         System.out.println(twoParam);
         //如果是基本输入区
         if (actionObject instanceof BasicButton)
         {
+            //保存前一个字符输入，用于后续判断
             String preInput = String.valueOf(inputString.charAt(inputString.length()-1));
 
             //如果此时处于初始状态，输入时先清除头部的零
             if(inputString.length() == 1 && inputString.toString().equals("0"))
             {
-                //若第一个输入的是点,直接追加
+                //若第一个输入的是点,直接追加不清除零
                 if(!button.getText().equals("."))
                 {
                     //若点击了运算符,则只有减号生效,且此时不删除起始的零
                     if(operator.contains(button.getText()))
                     {
-                        if (!button.getText().equals("-"))
+                        if (!button.getText().equals("-"))//若点击的不是减号，不生效
                         {
                             return;
                         }
                         else
                         {
+                            //以追加的方式来抵消所清除的零
                             inputString.append("0");
                         }
                     }
+                    //清除起始的零
                     inputString.delete(0, 1);
-
                 }
             }
 
             //如果是等号，进行计算
             if (button.getText().equals("="))
             {
-
+                //若存在两参数高级运算操作
                 if (twoParam)
                 {
                     System.out.println("两值运算");
-                    realParam = getAdvancedNotation();
-                    Service service3 = new Service();
+                    //获取后值表达式
+                    realParam = getAdvancedNotation(false);
+                    Service service3 = new Service();//注册服务
+                    //判断前后两值的格式是否正确
                     if(Checker.checker(realParam) && Checker.checker(fontParam))
                     {
-                        inputString = new StringBuilder(String.valueOf(service3.calculate(twoParamOperator,fontParam,realParam)));
+                        //传入服务层运算
+                        String answer = String.valueOf(service3.calculate(twoParamOperator,fontParam,realParam));
+                        //inputString = new StringBuilder(answer);
+                        //inputString.delete()
+                        //清除残存的前值及运算符 //TODO：失效
+                        inputString.delete(fontParamStartIndex,inputString.length());
+                        inputString.append(answer);//结果追加到文本框
+
+
                         resultText.setText(inputString.toString());
-                        //inputString = new StringBuilder("0");
+
                         //状态初始化
                         bracketCount = 0;
                         isNewNumber = true;
@@ -98,6 +112,7 @@ public class ButtonResponse extends MouseAndKeyboardListener {
                         return;
                     }
                 }
+
                 //检查括号，配对补齐
                 if(bracketCount != 0)
                 {
@@ -107,17 +122,20 @@ public class ButtonResponse extends MouseAndKeyboardListener {
                         inputString.append(")");
                     }
                 }
+                //初始化 //TODO：似乎应该是false
                 isNewNumber = true;
                 //检验计算
                 if(Checker.checker(inputString.toString()))
                 {
                     Service service1 = new Service();//注册服务
+                    //传入服务层计算并将结果赋给最终字符串
                     inputString = new StringBuilder(String.valueOf(service1.calculate("",inputString.toString())));
                 }
                 else
                 {
                     inputString = new StringBuilder("格式错误!");
                 }
+                //显示
                 resultText.setText(inputString.toString());
                 return;
                 //System.out.println("设置为真");
@@ -146,11 +164,12 @@ public class ButtonResponse extends MouseAndKeyboardListener {
                    return;
                 }
 
-                if(bracketCount > 0)
+                if(bracketCount > 0)//左括号净个数最小为零
                 {
                     bracketCount--;
                 }
-                else//若右括号多余左括号,退出不输入
+
+                else//若右括号多于左括号,操作失效
                 {
                     return;
                 }
@@ -187,6 +206,39 @@ public class ButtonResponse extends MouseAndKeyboardListener {
             //如果输入为加减乘除运算符
             if(operator.contains(button.getText()))
             {
+                //若存在两参数高级运算
+                if (twoParam)
+                {
+                    System.out.println("两值运算");
+                    //获取后值表达式
+                    realParam = getAdvancedNotation(false);
+                    Service service3 = new Service();//注册服务
+                    //检查两值
+                    if(Checker.checker(realParam) && Checker.checker(fontParam))
+                    {
+                        //计算结果
+                        String answer = String.valueOf(service3.calculate(twoParamOperator,fontParam,realParam));
+                        //inputString = new StringBuilder(answer);
+                        //inputString.delete()
+                        //显示，TODO:应删除前值字符串，未实现
+                        inputString.delete(fontParamStartIndex,inputString.length());
+                        //追加至文本框字符串
+                        inputString.append(answer);
+
+                        resultText.setText(inputString.toString());
+
+                        //状态初始化
+                        bracketCount = 0;
+                        isNewNumber = true;
+                        twoParam = false;
+
+                    }
+                    else {
+                        inputString = new StringBuilder("格式错误！");
+                        resultText.setText(inputString.toString());
+
+                    }
+                }
                 //检查前一个输入是否为同类型运算符
                 if(operator.contains(preInput))//若是则替换
                 {
@@ -264,7 +316,7 @@ public class ButtonResponse extends MouseAndKeyboardListener {
                         twoParam = false;
                         break;
                     case "π":
-                        if (isNewNumber)
+                        if (isNewNumber)//数字后面不能直接追加PI
                         {
                             inputString.append(Math.PI);
                             isNewNumber = false;
@@ -276,16 +328,22 @@ public class ButtonResponse extends MouseAndKeyboardListener {
                         break;
                     case "Mod":
                         System.out.println("取模");
+                        //设置高级运算标识位
                         twoParam = true;
-                        fontParam = getAdvancedNotation();
+                        //获取前值表达式
+                        fontParam = getAdvancedNotation(true);
+                        //通过再次追加的方式暂时性保留前值
                         inputString.append(fontParam);
+                        //追加运算符
                         inputString.append("%");
+                        //设置运算符标识
                         twoParamOperator = "Mod";
                         break;
                     case "x^y":
+                        //效果同上
                         System.out.println("幂");
                         twoParam = true;
-                        fontParam = getAdvancedNotation();
+                        fontParam = getAdvancedNotation(true);
                         inputString.append(fontParam);
                         inputString.append("^");
                         twoParamOperator = "x^y";
@@ -294,7 +352,8 @@ public class ButtonResponse extends MouseAndKeyboardListener {
                     default:
 
                         //获取需要计算的表达式
-                        String advancedNotation = getAdvancedNotation();
+                        String advancedNotation = getAdvancedNotation(false);
+
                         Service service2 = new Service();//注册服务
                         System.out.println("执行高级运算");
                         System.out.println(advancedNotation);
@@ -303,7 +362,16 @@ public class ButtonResponse extends MouseAndKeyboardListener {
                         {
                             System.out.println("检验正确");
                             System.out.println(advancedNotation);
-                            inputString = new StringBuilder(String.valueOf(service2.calculate(button.getText(),advancedNotation)));
+                            //获取结果
+                            String answer = String.valueOf(service2.calculate(button.getText(),advancedNotation));
+                            //检验，若结果为负数，前方补零，避免出现运算符连续出现
+                            if (Double.parseDouble(answer) < 0)
+                            {
+                                inputString.append("0");
+                            }
+                            //保留表达式追加
+                            inputString.append(answer);
+                            //inputString = new StringBuilder(String.valueOf(service2.calculate(button.getText(),advancedNotation)));
                         }
                         else
                         {
@@ -326,14 +394,14 @@ public class ButtonResponse extends MouseAndKeyboardListener {
         resultText.setText(inputString.toString());//重设文本框内容
     }
 
-    //设置文本框内容
+    //设置文本框内容（似乎没用，我也忘了为啥写这个了）
     public static void setResultText(JTextField result)
     {
         resultText = result;
     }
 
     //获取高级按键下的表达式
-    public String getAdvancedNotation()
+    public String getAdvancedNotation(boolean giveFontParamStartIndex)
     {
         //由后向前遍历表达式
         int start = 0;//记录被截取的字符串起始位置
@@ -368,8 +436,14 @@ public class ButtonResponse extends MouseAndKeyboardListener {
                 }
             }
         }
+        //取出表达式
         String advancedNotation = inputString.substring(start,inputString.length());
+        //从文本框中移除被取出的表达式
         inputString.delete(start,inputString.length());
+        if(giveFontParamStartIndex )
+        {
+            fontParamStartIndex = start;
+        }
         return advancedNotation;
     }
 }
