@@ -20,19 +20,12 @@ public class StyleAnimation extends MouseAndKeyboardListener
     private JButton button;
     private ArrayList<String> btnList;
 
-    public StyleAnimation()
-    {
+    public StyleAnimation() {
         btnList = new ArrayList<String>();
-        btnList.add("1");
-        btnList.add("2");
-        btnList.add("3");
-        btnList.add("4");
-        btnList.add("5");
-        btnList.add("6");
-        btnList.add("7");
-        btnList.add("8");
-        btnList.add("9");
-        btnList.add("0");
+        String number[] = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "0"};
+        for (int i = 0; i < number.length; i++) {
+            btnList.add(number[i]);
+        }
     }
     public StyleAnimation(JButton btn)
     {
