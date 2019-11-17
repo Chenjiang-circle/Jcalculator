@@ -18,9 +18,10 @@ public class Transform {
             // 如果发现是数组直接输出到新字符数组中
             if (expr.charAt(i) >= '0' && expr.charAt(i) <= '9') {
                 String tmp = "";
-                while (expr.charAt(i) >= '0' && expr.charAt(i) <= '9') {
+                // 要考虑浮点数
+                while ((expr.charAt(i) >= '0' && expr.charAt(i) <= '9') || expr.charAt(i) == '.') {
                     tmp += expr.charAt(i);
-                    if (i+1 < expr.length() && expr.charAt(i+1) >= '0' && expr.charAt(i+1) <= '9') {
+                    if (i+1 < expr.length() && ((expr.charAt(i+1) >= '0' && expr.charAt(i+1) <= '9') || expr.charAt(i+1) == '.')) {
                         i++;
                     } else {
                         break;
@@ -29,11 +30,15 @@ public class Transform {
                 postixNotation[j++] = tmp;
                 //System.out.println("发现是数字" + expr.charAt(i) + " 放入字符组中");
             }else {
+
                 // 如果是(就压如栈中
                 if (expr.charAt(i) == '(') {
+
                     operator.push(String.valueOf(expr.charAt(i)));
                     System.out.println("发现是（，将其压入栈中");
+
                 } else if (expr.charAt(i) == '+' || expr.charAt(i) == '-') {
+
                     // 当发现是+-号的时候，需要将压在栈中的符号都弹出来（直到栈顶为“（”或者为空时停止，再将+-号压入栈中）
                     System.out.println("发现" + expr.charAt(i) + ",判断栈是否为空");
                     if (operator.isEmpty()) {
