@@ -93,7 +93,7 @@ public class ButtonResponse extends MouseAndKeyboardListener {
                         String answer = String.valueOf(service3.calculate(twoParamOperator,fontParam,realParam));
                         //inputString = new StringBuilder(answer);
                         //inputString.delete()
-                        //清除残存的前值及运算符 //TODO：失效
+                        //清除残存的前值及运算符 /
                         inputString.delete(fontParamStartIndex,inputString.length());
                         inputString.append(answer);//结果追加到文本框
 
@@ -220,7 +220,7 @@ public class ButtonResponse extends MouseAndKeyboardListener {
                         String answer = String.valueOf(service3.calculate(twoParamOperator,fontParam,realParam));
                         //inputString = new StringBuilder(answer);
                         //inputString.delete()
-                        //显示，TODO:应删除前值字符串，未实现
+                        //显示，应删除前值字符串
                         inputString.delete(fontParamStartIndex,inputString.length());
                         //追加至文本框字符串
                         inputString.append(answer);
