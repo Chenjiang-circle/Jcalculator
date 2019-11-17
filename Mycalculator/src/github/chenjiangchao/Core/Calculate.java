@@ -83,6 +83,23 @@ public class Calculate {
     }
 
     /**
+     * 两个数值的高级运算
+     * @param opreator 运算符，比如x^y、Mod
+     * @param num1 第一个数值
+     * @param num2 第二个数值
+     * @return 返回结果
+     */
+    public static double advancedCalculate(String opreator, double num1, double num2) {
+        switch (opreator) {
+            case "x^y":
+                return Math.pow(num1, num2);
+            case "Mod":
+                return num1 % num2;
+        }
+        return 0;
+    }
+
+    /**
      * n!的计算
      * @param num n
      * @return 计算结果值
