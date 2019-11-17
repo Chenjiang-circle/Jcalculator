@@ -22,4 +22,22 @@ public class Service {
             return v;
         }
     }
+
+    /**
+     * 计算两位数字的高级表达式
+     * @param operator 高级操作符
+     * @param expre1 数值表达式1
+     * @param expre2 数值表达式2
+     * @return 返回高级表达式的结果
+     */
+    public double calculate(String operator, String expre1, String expre2) {
+        // 首先先将表达式运算出来
+        String[] strings1 = Transform.ToPostfixNotation(expre1);
+        double result1 = Calculate.calculatePostfixNotation(strings1);
+        String[] strings2 = Transform.ToPostfixNotation(expre2);
+        double result2 = Calculate.calculatePostfixNotation(strings2);
+
+        double v = Calculate.advancedCalculate(operator, result1, result2);
+        return v;
+    }
 }
