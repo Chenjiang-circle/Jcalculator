@@ -1,4 +1,4 @@
-package github.chenjiangchao.Core;
+package github.chenjiangchaoAndYujunpo.Core;
 
 import org.junit.Test;
 
