@@ -24,6 +24,7 @@ public class ButtonResponse extends MouseAndKeyboardListener {
     private static String twoParamOperator;//双值高级运算中的运算符
     //private static boolean giveFontParamStartIndex = true;
     private static int fontParamStartIndex = 0;
+    private static boolean isError = false;//标志位，标识运算是否出现错误
 
     private ArrayList<String> operator = new ArrayList<String >()//基本运算符序列
     {
@@ -45,6 +46,12 @@ public class ButtonResponse extends MouseAndKeyboardListener {
     //鼠标点击
     public void mouseReleased(MouseEvent e)//设置为Released是为了避免Clicked下产生的鼠标点击时发生位移导致点击失效的问题
     {
+        if(isError)
+        {
+            inputString = new StringBuilder("0");
+            isError = false;
+        }
+        System.out.println("isError" + isError);
         System.out.println(twoParam);
         //如果是基本输入区
         if (actionObject instanceof BasicButton)
@@ -133,7 +140,7 @@ public class ButtonResponse extends MouseAndKeyboardListener {
                 }
                 else
                 {
-                    inputString = new StringBuilder("格式错误!");
+                    inputString = new StringBuilder("格式错误！");
                 }
                 //显示
                 resultText.setText(inputString.toString());
@@ -375,7 +382,7 @@ public class ButtonResponse extends MouseAndKeyboardListener {
                         }
                         else
                         {
-                            inputString = new StringBuilder("格式错误!");
+                            inputString = new StringBuilder("格式错误！");
                         }
                 }
             }
@@ -390,6 +397,12 @@ public class ButtonResponse extends MouseAndKeyboardListener {
             bracketCount = 0;
             isNewNumber = true;
             twoParam = false;
+        }
+        if(inputString.toString().equals("格式错误！") || inputString.toString().equals("Infinity"))
+        {
+            System.out.println(inputString.toString());
+            System.out.println("设置error为真");
+            isError = true;
         }
         resultText.setText(inputString.toString());//重设文本框内容
     }
