@@ -1,7 +1,7 @@
-package github.chenjiangchao.UI;
+package github.chenjiangchaoAndYujunpo.UI;
 
-import github.chenjiangchao.Listener.ButtonResponse;
-import github.chenjiangchao.Listener.StyleAnimation;
+import github.chenjiangchaoAndYujunpo.Listener.ButtonResponse;
+import github.chenjiangchaoAndYujunpo.Listener.StyleAnimation;
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;

@@ -1,9 +1,7 @@
-package github.chenjiangchao.Service;
+package github.chenjiangchaoAndYujunpo.Service;
 
-import github.chenjiangchao.Core.Calculate;
-import github.chenjiangchao.Core.Transform;
-
-import java.util.Arrays;
+import github.chenjiangchaoAndYujunpo.Core.Calculate;
+import github.chenjiangchaoAndYujunpo.Core.Transform;
 
 public class Service {
     /**
