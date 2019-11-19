@@ -39,7 +39,6 @@ public class ButtonResponse extends MouseAndKeyboardListener {
     {
         button = btn;
         actionObject = obj;
-;
     }
 
     //鼠标点击
@@ -67,7 +66,8 @@ public class ButtonResponse extends MouseAndKeyboardListener {
                     //若点击了运算符,则只有减号生效,且此时不删除起始的零
                     if(operator.contains(button.getText()))
                     {
-                        if (!button.getText().equals("-"))//若点击的不是减号，不生效
+                        //若点击的不是减号、加号、乘号、除号，不生效
+                        if (!(button.getText().equals("-") || button.getText().equals("+") || button.getText().equals("*") || button.getText().equals("/")))
                         {
                             return;
                         }
