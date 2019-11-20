@@ -85,7 +85,7 @@ public class ButtonResponse extends MouseAndKeyboardListener {
             //如果是等号，进行计算
             if (button.getText().equals("="))
             {
-                //若存在两参数高级运算操作
+                //若存在两参数高级运算操作，检测无误之后，计算并推出该监听器
                 if (twoParam)
                 {
                     System.out.println("两值运算");
@@ -157,6 +157,7 @@ public class ButtonResponse extends MouseAndKeyboardListener {
                 }
 
                 bracketCount++;
+                // 恢复isNewNumber的初始状态
                 isNewNumber = true;
                 //System.out.println("设置为真");
             }
@@ -164,7 +165,7 @@ public class ButtonResponse extends MouseAndKeyboardListener {
             //如果是右括号，抵消左括号计数
             if(button.getText().equals(")"))
             {
-                //T前一个输入是运算符,不能输入右括号
+                //如果前一个输入是运算符,不能输入右括号
                 if(isNewNumber)
                 {
                    return;
@@ -174,11 +175,11 @@ public class ButtonResponse extends MouseAndKeyboardListener {
                 {
                     bracketCount--;
                 }
-
                 else//若右括号多于左括号,操作失效
                 {
                     return;
                 }
+                // 输入完有括号，计算器切换到不允许输入数字状态
                 isNewNumber = false;
                // System.out.println("设置为假");
 
@@ -452,7 +453,7 @@ public class ButtonResponse extends MouseAndKeyboardListener {
         String advancedNotation = inputString.substring(start,inputString.length());
         //从文本框中移除被取出的表达式
         inputString.delete(start,inputString.length());
-        if(giveFontParamStartIndex )
+        if(giveFontParamStartIndex)
         {
             fontParamStartIndex = start;
         }
