@@ -1,5 +1,6 @@
 package github.chenjiangchaoAndYujunpo.Listener;
 
+import github.chenjiangchaoAndYujunpo.Bean.Operator;
 import github.chenjiangchaoAndYujunpo.UI.BasicButton;
 import github.chenjiangchaoAndYujunpo.UI.FunctionButton;
 import github.chenjiangchaoAndYujunpo.Service.Service;
@@ -25,15 +26,7 @@ public class ButtonResponse extends MouseAndKeyboardListener {
     private static int fontParamStartIndex = 0;
     private static boolean isError = false;//标志位，标识运算是否出现错误
 
-    private ArrayList<String> operator = new ArrayList<String >()//基本运算符序列
-    {
-        {
-            add("+");
-            add("-");
-            add("*");
-            add("/");
-        }
-    };
+    private Operator operator = new Operator();
 
     public ButtonResponse(JButton btn,JPanel obj)//构造函数初始化
     {
